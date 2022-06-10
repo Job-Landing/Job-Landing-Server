@@ -1,4 +1,5 @@
 import express from 'express';
+import 'express-async-errors';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
@@ -11,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // when no page is found
-app.get('*', (req, res) => {
+app.get('*', async (req, res) => {
   throw new NotFoundError();
 });
 
