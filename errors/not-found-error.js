@@ -1,7 +1,8 @@
 import CustomError from './custom-error';
+import { StatusCodes } from 'http-status-codes';
 
 class NotFoundError extends CustomError {
-  statusCode = 404;
+  statusCode = StatusCodes.NOT_FOUND;
   constructor(message = 'Resource not found') {
     super(message);
     Object.setPrototypeOf(this, NotFoundError.prototype);

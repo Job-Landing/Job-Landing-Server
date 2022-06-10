@@ -1,11 +1,12 @@
 import CustomError from '../errors/custom-error';
+import { StatusCodes } from 'http-status-codes';
 
 const errorHandler = (err, req, res, next) => {
   if (err instanceof CustomError) {
     return res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
   console.error(err);
-  return res.status(500).send({
+  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
     errors: [{ message: 'Something went wrong' }],
   });
 };
