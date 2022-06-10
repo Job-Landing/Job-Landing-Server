@@ -7,6 +7,13 @@ import NotFoundError from './errors/not-found-error';
 import errorHandler from './middlewares/error-handler';
 
 import { signupRouter } from './routes/user/signup';
+import { signinRouter } from './routes/user/signin';
+import { signoutRouter } from './routes/user/signout';
+
+import { createJobRouter } from './routes/job/create';
+import { getJobsRouter } from './routes/job/show';
+import { updateJobRouter } from './routes/job/update';
+import { deleteJobRouter } from './routes/job/delete';
 
 const app = express();
 app.use(bodyParser.json());
@@ -15,6 +22,13 @@ app.use(cors());
 
 // routes
 app.use(signupRouter);
+app.use(signinRouter);
+app.use(signoutRouter);
+
+app.use(createJobRouter);
+app.use(getJobsRouter);
+app.use(updateJobRouter);
+app.use(deleteJobRouter);
 
 // when no page is found
 app.get('*', async (req, res) => {
