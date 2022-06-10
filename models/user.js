@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import validator from "validator";
 
 const userSchema = new mongoose.Schema({
-  firstName:{
+  name:{
     type: String,
     required: [true, 'Please provide name'],
     minlength: 3,
