@@ -37,4 +37,14 @@ const updateJob = async (req, res) => {
     }
 };
 
-export {createJob, getAllJob, updateJob}
+
+const deleteJob = async (req, res) => {
+    try {
+        await Job.findByIdAndDelete(req.params.id);
+        res.status(StatusCodes.OK).send({ message: 'Job deleted' });
+    } catch (error) {
+        res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    }
+};
+
+export {createJob, getAllJob, updateJob, deleteJob}
