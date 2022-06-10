@@ -13,4 +13,21 @@ const createJob = async (req, res) => {
     }
 }
 
-export {createJob}
+const getAllJob = async (req, res) => {
+    try {
+        const result = await Job.find({createdBy: req.body.createdBy});
+        res.status(StatusCodes.OK).send(result);
+    } catch (error) {
+        res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    }
+}
+
+
+// const updateJob = async (req, res) => {
+//     try {
+//     } catch (error) {
+//         res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+//     }
+// }
+
+export {createJob, getAllJob}
