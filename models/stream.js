@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import validator from 'validator';
 
 const streamSchema = new mongoose.Schema({
   company: {

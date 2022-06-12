@@ -5,6 +5,7 @@ const createJob = async (req, res) => {
   try {
     const job = await Job.create(req.body);
     res.status(StatusCodes.CREATED).send(job);
+    return job._id;
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
   }

@@ -2,9 +2,8 @@ import Stream from '../models/stream';
 
 const createItem = async (stream) => {
   try {
-    const item = await Stream.create({
-      stream,
-    });
+    const item = await Stream.create(stream);
+    return item;
   } catch (error) {
     console.log(error);
   }
@@ -47,3 +46,5 @@ const deleteItem = async (stream) => {
     console.log(error);
   }
 };
+
+export { createItem, getItem, getItems, updateItem, deleteItem };
