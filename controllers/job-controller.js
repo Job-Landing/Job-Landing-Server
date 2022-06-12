@@ -27,6 +27,7 @@ const updateJob = async (req, res) => {
       new: true,
     });
     res.status(StatusCodes.OK).send(job);
+    return job._id;
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
   }

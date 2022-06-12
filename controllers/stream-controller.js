@@ -9,9 +9,9 @@ const createItem = async (stream) => {
   }
 };
 
-const getItem = async (stream) => {
+const getItem = async (jobId) => {
   try {
-    const item = await Stream.findOne({ stream });
+    const item = await Stream.findOne({ jobId });
     return item;
   } catch (error) {
     console.log(error);
