@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import validator from "validator";
+import validator from 'validator';
 
 const userSchema = new mongoose.Schema({
-  name:{
+  name: {
     type: String,
     required: [true, 'Please provide name'],
     minlength: 3,
@@ -11,13 +11,11 @@ const userSchema = new mongoose.Schema({
   lastName: {
     type: String,
     trim: true,
-    default: 'lastName',
   },
   location: {
     type: String,
     trim: true,
     maxlength: 20,
-    default: 'Northeastern',
   },
   email: {
     type: String,
