@@ -38,9 +38,9 @@ const updateItem = async (stream) => {
   }
 };
 
-const deleteItem = async (stream) => {
+const deleteItem = async (jobId) => {
   try {
-    const item = await Stream.findOneAndDelete(stream.jobId);
+    const item = await Stream.findOneAndDelete({ jobId });
     return item;
   } catch (error) {
     console.log(error);

@@ -35,8 +35,9 @@ const updateJob = async (req, res) => {
 
 const deleteJob = async (req, res) => {
   try {
-    await Job.findByIdAndDelete(req.params.id);
+    const jobId = await Job.findByIdAndDelete(req.params.id);
     res.status(StatusCodes.OK).send({ message: 'Job deleted' });
+    return jobId;
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
   }
