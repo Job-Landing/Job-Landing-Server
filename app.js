@@ -15,6 +15,8 @@ import { getJobsRouter } from './routes/job/show';
 import { updateJobRouter } from './routes/job/update';
 import { deleteJobRouter } from './routes/job/delete';
 
+import { streamRouter } from './routes/stream/show';
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,6 +31,8 @@ app.use(createJobRouter);
 app.use(getJobsRouter);
 app.use(updateJobRouter);
 app.use(deleteJobRouter);
+
+app.use(streamRouter);
 
 // when no page is found
 app.get('*', async (req, res) => {

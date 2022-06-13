@@ -1,7 +1,7 @@
 // CRUD operations for User
 import User from '../models/user';
 import { StatusCodes } from 'http-status-codes';
-import BadRequestError from "../errors/bad-request-error.js";
+import BadRequestError from '../errors/bad-request-error.js';
 
 const createUser = async (req, res) => {
   try {
@@ -12,7 +12,7 @@ const createUser = async (req, res) => {
     if (userAlreadyExists) {
       throw new BadRequestError('Email has been registered already!');
     }
-    const user = await User.create({name, email, password});
+    const user = await User.create({ name, email, password });
     res.status(StatusCodes.CREATED).send(user);
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
@@ -21,7 +21,9 @@ const createUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    console.log(req);
+    // const user = await User.findById(req.params.id);
+    const user = await User.findOne({ email: req.body.email });
     res.status(StatusCodes.OK).send(user);
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
