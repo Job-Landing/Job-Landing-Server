@@ -34,6 +34,11 @@ app.use(deleteJobRouter);
 
 app.use(streamRouter);
 
+// home page
+app.get('/', async (req, res) => {
+  res.send('This is the server side of our job landing application!');
+});
+
 // when no page is found
 app.get('*', async (req, res) => {
   throw new NotFoundError();
