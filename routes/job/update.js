@@ -1,5 +1,4 @@
 import express from 'express';
-import Stream from '../../models/stream.js';
 import { updateJob } from '../../controllers/job-controller.js';
 import {
   createItem,

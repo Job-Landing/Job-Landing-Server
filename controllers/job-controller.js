@@ -1,4 +1,4 @@
-import Job from '../models/Job.js';
+import Job from '../models/job.js';
 import { StatusCodes } from 'http-status-codes';
 
 const createJob = async (req, res) => {

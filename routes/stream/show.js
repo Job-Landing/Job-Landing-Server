@@ -1,5 +1,5 @@
 import express from 'express';
-import { getItems } from '../../controllers/stream-controller';
+import { getItems } from '../../controllers/stream-controller.js';
 
 const router = express.Router();
 

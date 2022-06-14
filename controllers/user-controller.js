@@ -1,5 +1,5 @@
 // CRUD operations for User
-import User from '../models/user';
+import User from '../models/user.js';
 import { StatusCodes } from 'http-status-codes';
 import BadRequestError from '../errors/bad-request-error.js';
 

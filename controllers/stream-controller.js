@@ -1,4 +1,4 @@
-import Stream from '../models/stream';
+import Stream from '../models/stream.js';
 import { StatusCodes } from 'http-status-codes';
 
 const createItem = async (stream) => {

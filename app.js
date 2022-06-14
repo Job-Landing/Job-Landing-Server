@@ -3,19 +3,19 @@ import 'express-async-errors';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-import NotFoundError from './errors/not-found-error';
-import errorHandler from './middlewares/error-handler';
+import NotFoundError from './errors/not-found-error.js';
+import errorHandler from './middlewares/error-handler.js';
 
-import { signupRouter } from './routes/user/signup';
-import { signinRouter } from './routes/user/signin';
-import { signoutRouter } from './routes/user/signout';
+import { signupRouter } from './routes/user/signup.js';
+import { signinRouter } from './routes/user/signin.js';
+import { signoutRouter } from './routes/user/signout.js';
 
-import { createJobRouter } from './routes/job/create';
-import { getJobsRouter } from './routes/job/show';
-import { updateJobRouter } from './routes/job/update';
-import { deleteJobRouter } from './routes/job/delete';
+import { createJobRouter } from './routes/job/create.js';
+import { getJobsRouter } from './routes/job/show.js';
+import { updateJobRouter } from './routes/job/update.js';
+import { deleteJobRouter } from './routes/job/delete.js';
 
-import { streamRouter } from './routes/stream/show';
+import { streamRouter } from './routes/stream/show.js';
 
 const app = express();
 app.use(bodyParser.json());
