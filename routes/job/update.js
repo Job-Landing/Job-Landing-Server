@@ -16,8 +16,8 @@ router.put(
       .isLength({ min: 2 })
       .withMessage('Position must be at least 2 characters long'),
     body('status')
-      .isIn(['', 'interview', 'declined', 'pending'])
-      .withMessage('Status must be interview, declined or pending'),
+      .isIn(['', 'interview', 'declined', 'pending', 'offer'])
+      .withMessage('Status must be interview, declined, pending or offer'),
     body('type')
       .isIn(['', 'full-time', 'part-time', 'remote', 'internship'])
       .withMessage('Type must be full-time, part-time, remote or internship'),
