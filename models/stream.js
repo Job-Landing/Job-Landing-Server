@@ -4,22 +4,15 @@ import validator from 'validator';
 const streamSchema = new mongoose.Schema({
   company: {
     type: String,
-    required: [true, 'Please provide company'],
-    maxlength: 50,
+    required: true,
   },
   position: {
     type: String,
-    required: [true, 'Please provide position'],
-    maxlength: 100,
+    required: true,
   },
   applyUrl: {
     type: String,
-    required: [true, 'Please provide apply url'],
-    validate: {
-      validator: validator.isURL,
-      message: 'Please provide a valid url',
-    },
-    maxlength: 200,
+    required: true,
   },
   createAt: {
     type: Date,
@@ -27,8 +20,7 @@ const streamSchema = new mongoose.Schema({
   },
   jobId: {
     type: mongoose.Types.ObjectId,
-    required: [true, 'Please provide job id'],
-    maxlength: 100,
+    required: true,
   },
 });
 
