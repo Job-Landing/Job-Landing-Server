@@ -12,12 +12,12 @@ const createJob = async (req, res) => {
 };
 
 // TODO: should use user Id to be filter
-const getAllJob = async (req, res) => {
+const getJobs = async (createdBy) => {
   try {
-    const result = await Job.find({ createdBy: req.body.createdBy });
-    res.status(StatusCodes.OK).send(result);
+    const jobs = await Job.find({ createdBy });
+    return jobs;
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    console.log(error);
   }
 };
 
@@ -43,4 +43,4 @@ const deleteJob = async (req, res) => {
   }
 };
 
-export { createJob, getAllJob, updateJob, deleteJob };
+export { createJob, getJobs, updateJob, deleteJob };
