@@ -1,5 +1,4 @@
 import Stream from '../models/stream.js';
-import { StatusCodes } from 'http-status-codes';
 
 const createItem = async (stream) => {
   try {
@@ -19,12 +18,12 @@ const getItem = async (jobId) => {
   }
 };
 
-const getItems = async (req, res) => {
+const getItems = async () => {
   try {
     const items = await Stream.find({});
-    res.status(StatusCodes.OK).json(items);
+    return items;
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    console.log(error);
   }
 };
 
