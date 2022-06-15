@@ -33,13 +33,11 @@ const updateJob = async (req, res) => {
   }
 };
 
-const deleteJob = async (req, res) => {
+const deleteJob = async (id) => {
   try {
-    const jobId = await Job.findByIdAndDelete(req.params.id);
-    res.status(StatusCodes.OK).send({ message: 'Job deleted' });
-    return jobId;
+    const jobId = await Job.findByIdAndDelete(id);
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    console.log(error);
   }
 };
 
