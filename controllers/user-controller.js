@@ -3,8 +3,7 @@ import User from '../models/user.js';
 
 const createUser = async (body) => {
   try {
-    const { username, email, password, location } = body;
-    const user = await User.create({ username, email, password, location });
+    const user = await User.create(body);
     return user;
   } catch (error) {
     console.log(error);

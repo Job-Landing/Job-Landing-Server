@@ -1,17 +1,15 @@
 import Job from '../models/job.js';
 import { StatusCodes } from 'http-status-codes';
 
-const createJob = async (req, res) => {
+const createJob = async (body) => {
   try {
-    const job = await Job.create(req.body);
-    res.status(StatusCodes.CREATED).send(job);
-    return job._id;
+    const job = await Job.create(body);
+    return job;
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    console.log(error);
   }
 };
 
-// TODO: should use user Id to be filter
 const getJobs = async (createdBy) => {
   try {
     const jobs = await Job.find({ createdBy });

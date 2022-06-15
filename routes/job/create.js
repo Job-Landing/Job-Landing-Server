@@ -1,11 +1,12 @@
 import express from 'express';
 import { createJob } from '../../controllers/job-controller.js';
 import { createItem } from '../../controllers/stream-controller.js';
+import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
 
 router.post('/job', async (req, res) => {
-  const jobId = await createJob(req, res);
+  const job = await createJob(req.body);
   console.log('create job');
 
   // check if applyUrl exists
@@ -15,11 +16,13 @@ router.post('/job', async (req, res) => {
       company: req.body.company,
       position: req.body.position,
       applyUrl: req.body.applyUrl,
-      jobId: jobId,
+      jobId: job._id,
     };
     console.log('create stream item');
     await createItem(stream);
   }
+
+  res.status(StatusCodes.OK).send(job);
 });
 
 export { router as createJobRouter };
