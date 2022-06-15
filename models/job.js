@@ -17,22 +17,15 @@ const jobSchema = new mongoose.Schema({
     enum: ['interview', 'declined', 'pending'],
     default: 'pending',
   },
-  jobType: {
+  type: {
     type: String,
     enum: ['full-time', 'part-time', 'remote', 'internship'],
     default: 'full-time',
   },
-  jobLocation: {
+  location: {
     type: String,
     default: 'Northeastern',
     required: true,
-  },
-  createdBy: {
-    type: String,
-    required: true,
-    // type: mongoose.Types.ObjectId,
-    // ref: 'User',
-    // required: [true, 'Please provide user'],
   },
   applyUrl: {
     type: String,
@@ -41,6 +34,13 @@ const jobSchema = new mongoose.Schema({
       message: 'Please provide a valid url',
     },
     maxlength: 200,
+  },
+  createdBy: {
+    type: String,
+    required: true,
+    // type: mongoose.Types.ObjectId,
+    // ref: 'User',
+    // required: [true, 'Please provide user'],
   },
 });
 
