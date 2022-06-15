@@ -1,5 +1,4 @@
 import Job from '../models/job.js';
-import { StatusCodes } from 'http-status-codes';
 
 const createJob = async (body) => {
   try {
@@ -19,15 +18,14 @@ const getJobs = async (createdBy) => {
   }
 };
 
-const updateJob = async (req, res) => {
+const updateJob = async (id, body) => {
   try {
-    const job = await Job.findByIdAndUpdate(req.params.id, req.body, {
+    const job = await Job.findByIdAndUpdate(id, body, {
       new: true,
     });
-    res.status(StatusCodes.OK).send(job);
-    return job._id;
+    return job;
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    console.log(error);
   }
 };
 
