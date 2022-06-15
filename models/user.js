@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
+import Password from '../utils/password.js';
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, 'Please provide name'],
+    required: [true, 'Please provide username'],
     minlength: 4,
     trim: true,
     unique: true,
@@ -30,6 +31,14 @@ const userSchema = new mongoose.Schema({
     trim: true,
     maxlength: 20,
   },
+});
+
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    const hashedPassword = await Password.toHash(this.password);
+    this.password = hashedPassword;
+  }
+  next();
 });
 
 const User = mongoose.model('User', userSchema);
