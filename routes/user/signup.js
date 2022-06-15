@@ -1,8 +1,13 @@
 import express from 'express';
 import { body } from 'express-validator/check/index.js';
-import { getUser, createUser } from '../../controllers/user-controller.js';
+import {
+  getUser,
+  getUserByUsername,
+  createUser,
+} from '../../controllers/user-controller.js';
 import { StatusCodes } from 'http-status-codes';
 import validationHandler from '../../middlewares/validation-handler.js';
+import BadRequestError from '../../errors/bad-request-error.js';
 
 const router = express.Router();
 
@@ -25,6 +30,11 @@ router.post(
     const existingUser = await getUser(email);
     if (existingUser) {
       throw new BadRequestError('User already exists!');
+    }
+    const { username } = req.body;
+    const invalidUsername = await getUserByUsername(username);
+    if (invalidUsername) {
+      throw new BadRequestError('Username already exists!');
     }
 
     // create the user

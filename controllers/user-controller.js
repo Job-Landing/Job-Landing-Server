@@ -23,6 +23,16 @@ const getUser = async (email) => {
   }
 };
 
+const getUserByUsername = async (username) => {
+  try {
+    // const user = await User.findById(req.params.id);
+    const user = await User.findOne({ username });
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const updateUser = async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
@@ -43,4 +53,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-export { createUser, getUser, updateUser, deleteUser };
+export { createUser, getUser, getUserByUsername, updateUser, deleteUser };
