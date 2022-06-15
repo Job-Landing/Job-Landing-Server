@@ -2,20 +2,12 @@ import mongoose from 'mongoose';
 import validator from 'validator';
 
 const userSchema = new mongoose.Schema({
-  name: {
+  username: {
     type: String,
     required: [true, 'Please provide name'],
-    minlength: 3,
+    minlength: 4,
     trim: true,
-  },
-  lastName: {
-    type: String,
-    trim: true,
-  },
-  location: {
-    type: String,
-    trim: true,
-    maxlength: 20,
+    unique: true,
   },
   email: {
     type: String,
@@ -32,6 +24,11 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please provide password'],
     minlength: 6,
     trim: true,
+  },
+  location: {
+    type: String,
+    trim: true,
+    maxlength: 20,
   },
 });
 
