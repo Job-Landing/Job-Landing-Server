@@ -14,9 +14,6 @@ router.post('/user/signin', async (req, res) => {
     throw new BadRequestError('User does not exist!');
   }
 
-  console.log(existingUser);
-
-  // TODO: should check the email and password
   const isValidPassword = await Password.compare(
     existingUser.password,
     password

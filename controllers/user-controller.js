@@ -3,20 +3,13 @@ import User from '../models/user.js';
 import { StatusCodes } from 'http-status-codes';
 import BadRequestError from '../errors/bad-request-error.js';
 
-const createUser = async (req, res) => {
+const createUser = async (body) => {
   try {
-    const { username, email, password } = req.body;
-
-    //check the email has not been created yet
-    const userAlreadyExists = await User.findOne({ email });
-    if (userAlreadyExists) {
-      throw new BadRequestError('Email has been registered already!');
-    }
-    const user = await User.create({ username, email, password });
-    res.status(StatusCodes.CREATED).send(user);
+    const { username, email, password, location } = body;
+    const user = await User.create({ username, email, password, location });
+    return user;
   } catch (error) {
     console.log(error);
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
   }
 };
 
