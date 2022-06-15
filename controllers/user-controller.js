@@ -20,13 +20,13 @@ const createUser = async (req, res) => {
   }
 };
 
-const getUser = async (req, res) => {
+const getUser = async (email) => {
   try {
     // const user = await User.findById(req.params.id);
-    const user = await User.findOne({ email: req.body.email });
-    res.status(StatusCodes.OK).send(user);
+    const user = await User.findOne({ email });
+    return user;
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    console.log(error);
   }
 };
 

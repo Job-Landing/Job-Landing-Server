@@ -5,9 +5,9 @@ const scryptAsync = promisify(scrypt);
 
 class Password {
   static async toHash(password) {
-    const salt = await randomBytes(8);
+    const salt = await randomBytes(8).toString('hex');
     const buffer = await scryptAsync(password, salt, 64);
-    return `${buffer.toString('hex')}.${salt.toString('hex')}`;
+    return `${buffer.toString('hex')}.${salt}`;
   }
 
   static async compare(storedPassword, suppliedPassword) {
