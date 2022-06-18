@@ -1,38 +1,31 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
+import Password from '../utils/password.js';
 
 const userSchema = new mongoose.Schema({
-  name: {
+  username: {
     type: String,
-    required: [true, 'Please provide name'],
-    minlength: 3,
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    trim: true,
-  },
-  location: {
-    type: String,
-    trim: true,
-    maxlength: 20,
+    required: true,
   },
   email: {
     type: String,
-    required: [true, 'Please provide email'],
-    validate: {
-      validator: validator.isEmail,
-      message: 'Please provide a valid email',
-    },
-    trim: true,
-    unique: true,
+    required: true,
   },
   password: {
     type: String,
-    required: [true, 'Please provide password'],
-    minlength: 6,
-    trim: true,
+    required: true,
   },
+  location: {
+    type: String,
+  },
+});
+
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    const hashedPassword = await Password.toHash(this.password);
+    this.password = hashedPassword;
+  }
+  next();
 });
 
 const User = mongoose.model('User', userSchema);

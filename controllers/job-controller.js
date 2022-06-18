@@ -1,46 +1,40 @@
 import Job from '../models/job.js';
-import { StatusCodes } from 'http-status-codes';
 
-const createJob = async (req, res) => {
+const createJob = async (body) => {
   try {
-    const job = await Job.create(req.body);
-    res.status(StatusCodes.CREATED).send(job);
-    return job._id;
+    const job = await Job.create(body);
+    return job;
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    console.log(error);
   }
 };
 
-// TODO: should use user Id to be filter
-const getAllJob = async (req, res) => {
+const getJobs = async (createdBy) => {
   try {
-    const result = await Job.find({ createdBy: req.body.createdBy });
-    res.status(StatusCodes.OK).send(result);
+    const jobs = await Job.find({ createdBy });
+    return jobs;
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    console.log(error);
   }
 };
 
-const updateJob = async (req, res) => {
+const updateJob = async (id, body) => {
   try {
-    const job = await Job.findByIdAndUpdate(req.params.id, req.body, {
+    const job = await Job.findByIdAndUpdate(id, body, {
       new: true,
     });
-    res.status(StatusCodes.OK).send(job);
-    return job._id;
+    return job;
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    console.log(error);
   }
 };
 
-const deleteJob = async (req, res) => {
+const deleteJob = async (id) => {
   try {
-    const jobId = await Job.findByIdAndDelete(req.params.id);
-    res.status(StatusCodes.OK).send({ message: 'Job deleted' });
-    return jobId;
+    const jobId = await Job.findByIdAndDelete(id);
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
+    console.log(error);
   }
 };
 
-export { createJob, getAllJob, updateJob, deleteJob };
+export { createJob, getJobs, updateJob, deleteJob };
