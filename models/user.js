@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import validator from 'validator';
 import Password from '../utils/password.js';
 
 const userSchema = new mongoose.Schema({
@@ -14,9 +13,6 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  },
-  location: {
-    type: String,
   },
 });
 
