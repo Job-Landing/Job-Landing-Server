@@ -4,8 +4,8 @@ import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
 
-router.get('/job', async (req, res) => {
-  const jobs = await getJobs(req.body.createdBy);
+router.get('/job/:id', async (req, res) => {
+  const jobs = await getJobs(req.params.id);
   res.status(StatusCodes.OK).send(jobs);
   console.log('get all job');
 });

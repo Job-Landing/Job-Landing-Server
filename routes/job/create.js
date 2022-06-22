@@ -23,9 +23,6 @@ router.post(
       .isIn(['', 'full-time', 'part-time', 'remote', 'internship'])
       .withMessage('Type must be full-time, part-time, remote or internship'),
     body('applyUrl').isURL().withMessage('Apply URL must be valid'),
-    body('createdBy')
-      .isEmail()
-      .withMessage('The user must be a valid email address'),
   ],
   validationHandler,
   async (req, res) => {
