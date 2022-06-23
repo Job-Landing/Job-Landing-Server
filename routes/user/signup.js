@@ -5,6 +5,7 @@ import {
   getUserByUsername,
   createUser,
 } from '../../controllers/user-controller.js';
+import { initJob } from '../../controllers/job-controller.js';
 import { StatusCodes } from 'http-status-codes';
 import validationHandler from '../../middlewares/validation-handler.js';
 import BadRequestError from '../../errors/bad-request-error.js';
@@ -39,6 +40,10 @@ router.post(
 
     // create the user
     const user = await createUser(req.body);
+
+    // create the job
+    const job = await initJob(user._id);
+
     res.status(StatusCodes.OK).send(user);
 
     console.log('signup');

@@ -1,5 +1,18 @@
 import Job from '../models/job.js';
 
+const initJob = async (user_id) => {
+  try {
+    const job = new Job({
+      user_id,
+      job_list: [],
+    });
+    await job.save();
+    return job;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const createJob = async (body) => {
   try {
     const job = await Job.create(body);
@@ -37,4 +50,4 @@ const deleteJob = async (id) => {
   }
 };
 
-export { createJob, getJobs, updateJob, deleteJob };
+export { initJob, createJob, getJobs, updateJob, deleteJob };
