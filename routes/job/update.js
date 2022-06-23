@@ -33,15 +33,17 @@ router.put(
     );
     console.log('update job');
 
-    // const stream = {
-    //   company: req.body.company,
-    //   position: req.body.position,
-    //   applyUrl: req.body.applyUrl,
-    //   jobId: job._id,
-    // };
+    const stream = {
+      company: job.company,
+      position: job.position,
+      type: job.type,
+      location: job.location,
+      applyUrl: job.applyUrl,
+      jobId: job._id,
+    };
 
-    // console.log('update stream item');
-    // await updateItem(stream);
+    console.log('update stream item');
+    await updateItem(stream);
 
     res.status(StatusCodes.OK).send(job);
   }

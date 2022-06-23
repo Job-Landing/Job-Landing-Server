@@ -2,12 +2,12 @@ import Job from '../models/job.js';
 
 const initJob = async (user_id) => {
   try {
-    const job = new Job({
+    const jobs = new Job({
       user_id,
       job_list: [],
     });
-    await job.save();
-    return job;
+    await jobs.save();
+    return jobs;
   } catch (error) {
     console.log(error);
   }
@@ -15,12 +15,11 @@ const initJob = async (user_id) => {
 
 const createJob = async (user_id, body) => {
   try {
-    const job = await Job.findOne({ user_id });
-    job.job_list.push(body);
-    await job.save();
-    console.log(job);
-    // return the new job
-    return job.job_list[job.job_list.length - 1];
+    const jobs = await Job.findOne({ user_id });
+    jobs.job_list.push(body);
+    await jobs.save();
+    // return the new jobs
+    return jobs.job_list[jobs.job_list.length - 1];
   } catch (error) {
     console.log(error);
   }
@@ -37,13 +36,14 @@ const getJobs = async (user_id) => {
 
 const updateJob = async (user_id, job_id, body) => {
   try {
-    const job = await Job.findOne({ user_id });
-    const jobIndex = job.job_list.findIndex(
+    const jobs = await Job.findOne({ user_id });
+    const jobIndex = jobs.job_list.findIndex(
       (job) => job._id.toString() === job_id
     );
-    job.job_list[jobIndex] = body;
-    await job.save();
-    return job.job_list[jobIndex];
+    jobs.job_list[jobIndex] = body;
+    await jobs.save();
+    console.log(jobs);
+    return jobs.job_list[jobIndex];
   } catch (error) {
     console.log(error);
   }
@@ -51,12 +51,13 @@ const updateJob = async (user_id, job_id, body) => {
 
 const deleteJob = async (user_id, job_id) => {
   try {
-    const job = await Job.findOne({ user_id });
-    const jobIndex = job.job_list.findIndex(
+    const jobs = await Job.findOne({ user_id });
+    const jobIndex = jobs.job_list.findIndex(
       (job) => job._id.toString() === job_id
     );
-    job.job_list.splice(jobIndex, 1);
-    await job.save();
+    const deletedJob = jobs.job_list.splice(jobIndex, 1);
+    await jobs.save();
+    return deletedJob._id;
   } catch (error) {
     console.log(error);
   }

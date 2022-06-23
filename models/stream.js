@@ -22,7 +22,7 @@ const streamSchema = new mongoose.Schema({
     required: true,
   },
   createAt: {
-    type: String,
+    type: Date,
     default: Date.now,
   },
   jobId: {

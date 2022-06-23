@@ -30,17 +30,19 @@ router.post(
     console.log('create job');
 
     // check if applyUrl exists
-    // if (req.body.applyUrl) {
-    //   // push to the stream
-    //   const stream = {
-    //     company: req.body.company,
-    //     position: req.body.position,
-    //     applyUrl: req.body.applyUrl,
-    //     jobId: job._id,
-    //   };
-    //   console.log('create stream item');
-    //   await createItem(stream);
-    // }
+    if (job.applyUrl) {
+      // push to the stream
+      const stream = {
+        company: job.company,
+        position: job.position,
+        type: job.type,
+        location: job.location,
+        applyUrl: job.applyUrl,
+        jobId: job._id,
+      };
+      console.log('create stream item');
+      await createItem(stream);
+    }
 
     res.status(StatusCodes.OK).send(job);
   }
