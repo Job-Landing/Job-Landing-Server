@@ -4,16 +4,14 @@ import { deleteItem } from '../../controllers/stream-controller.js';
 
 const router = express.Router();
 
-router.delete('/job/:id', async (req, res) => {
-  const { id } = req.params;
-
+router.delete('/job/:user_id/:job_id', async (req, res) => {
   // delete job
-  await deleteJob(id);
+  await deleteJob(req.params.user_id, req.params.job_id);
   console.log('delete job');
 
-  // delete stream
-  await deleteItem(id);
-  console.log('delete stream item');
+  // // delete stream
+  // await deleteItem(id);
+  // console.log('delete stream item');
 
   res.send({});
 });

@@ -49,9 +49,14 @@ const updateJob = async (user_id, job_id, body) => {
   }
 };
 
-const deleteJob = async (id) => {
+const deleteJob = async (user_id, job_id) => {
   try {
-    const jobId = await Job.findByIdAndDelete(id);
+    const job = await Job.findOne({ user_id });
+    const jobIndex = job.job_list.findIndex(
+      (job) => job._id.toString() === job_id
+    );
+    job.job_list.splice(jobIndex, 1);
+    await job.save();
   } catch (error) {
     console.log(error);
   }
