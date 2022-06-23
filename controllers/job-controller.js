@@ -35,10 +35,10 @@ const getJob = async (user_id) => {
   }
 };
 
-const getJobs = async (createdBy) => {
+const getJobs = async (user_id) => {
   try {
-    const jobs = await Job.find({ createdBy });
-    return jobs;
+    const jobs = await Job.findOne({ user_id });
+    return jobs.job_list;
   } catch (error) {
     console.log(error);
   }
