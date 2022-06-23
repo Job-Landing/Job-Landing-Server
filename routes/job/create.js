@@ -8,7 +8,7 @@ import validationHandler from '../../middlewares/validation-handler.js';
 const router = express.Router();
 
 router.post(
-  '/job',
+  '/job/:user_id',
   [
     body('company')
       .isLength({ min: 3 })
@@ -26,21 +26,21 @@ router.post(
   ],
   validationHandler,
   async (req, res) => {
-    const job = await createJob(req.body);
+    const job = await createJob(req.params.user_id, req.body);
     console.log('create job');
 
     // check if applyUrl exists
-    if (req.body.applyUrl) {
-      // push to the stream
-      const stream = {
-        company: req.body.company,
-        position: req.body.position,
-        applyUrl: req.body.applyUrl,
-        jobId: job._id,
-      };
-      console.log('create stream item');
-      await createItem(stream);
-    }
+    // if (req.body.applyUrl) {
+    //   // push to the stream
+    //   const stream = {
+    //     company: req.body.company,
+    //     position: req.body.position,
+    //     applyUrl: req.body.applyUrl,
+    //     jobId: job._id,
+    //   };
+    //   console.log('create stream item');
+    //   await createItem(stream);
+    // }
 
     res.status(StatusCodes.OK).send(job);
   }

@@ -13,9 +13,22 @@ const initJob = async (user_id) => {
   }
 };
 
-const createJob = async (body) => {
+const createJob = async (user_id, body) => {
   try {
-    const job = await Job.create(body);
+    const job = await getJob(user_id);
+    job.job_list.push(body);
+    await job.save();
+    console.log(job);
+    // return the new job
+    return job.job_list[job.job_list.length - 1];
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getJob = async (user_id) => {
+  try {
+    const job = await Job.findOne({ user_id });
     return job;
   } catch (error) {
     console.log(error);
