@@ -10,16 +10,23 @@ const streamSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
   applyUrl: {
     type: String,
+    // may change to not required
     required: true,
   },
   createAt: {
-    type: Date,
+    type: String,
     default: Date.now,
   },
   jobId: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
 });
