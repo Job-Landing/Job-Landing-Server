@@ -15,21 +15,12 @@ const initJob = async (user_id) => {
 
 const createJob = async (user_id, body) => {
   try {
-    const job = await getJob(user_id);
+    const job = await Job.findOne({ user_id });
     job.job_list.push(body);
     await job.save();
     console.log(job);
     // return the new job
     return job.job_list[job.job_list.length - 1];
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const getJob = async (user_id) => {
-  try {
-    const job = await Job.findOne({ user_id });
-    return job;
   } catch (error) {
     console.log(error);
   }
@@ -44,12 +35,15 @@ const getJobs = async (user_id) => {
   }
 };
 
-const updateJob = async (id, body) => {
+const updateJob = async (user_id, job_id, body) => {
   try {
-    const job = await Job.findByIdAndUpdate(id, body, {
-      new: true,
-    });
-    return job;
+    const job = await Job.findOne({ user_id });
+    const jobIndex = job.job_list.findIndex(
+      (job) => job._id.toString() === job_id
+    );
+    job.job_list[jobIndex] = body;
+    await job.save();
+    return job.job_list[jobIndex];
   } catch (error) {
     console.log(error);
   }

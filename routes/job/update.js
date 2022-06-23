@@ -3,11 +3,12 @@ import { updateJob } from '../../controllers/job-controller.js';
 import { updateItem } from '../../controllers/stream-controller.js';
 import { body } from 'express-validator/check/index.js';
 import validationHandler from '../../middlewares/validation-handler.js';
+import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
 
 router.put(
-  '/job/:id',
+  '/job/:user_id/:job_id',
   [
     body('company')
       .isLength({ min: 3 })
@@ -25,18 +26,22 @@ router.put(
   ],
   validationHandler,
   async (req, res) => {
-    const job = await updateJob(req.params.id, req.body);
+    const job = await updateJob(
+      req.params.user_id,
+      req.params.job_id,
+      req.body
+    );
     console.log('update job');
 
-    const stream = {
-      company: req.body.company,
-      position: req.body.position,
-      applyUrl: req.body.applyUrl,
-      jobId: job._id,
-    };
+    // const stream = {
+    //   company: req.body.company,
+    //   position: req.body.position,
+    //   applyUrl: req.body.applyUrl,
+    //   jobId: job._id,
+    // };
 
-    console.log('update stream item');
-    await updateItem(stream);
+    // console.log('update stream item');
+    // await updateItem(stream);
 
     res.status(StatusCodes.OK).send(job);
   }
