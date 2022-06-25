@@ -31,9 +31,9 @@ router.post(
       password
     );
 
-    const isValidUsername = existingUser.username === req.body.username;
+    // const isValidUsername = existingUser.username === req.body.username;
 
-    if (!isValidPassword || !isValidUsername) {
+    if (!isValidPassword) {
       throw new BadRequestError('Invalid username or password!');
     }
 

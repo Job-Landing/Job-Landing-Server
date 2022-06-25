@@ -2,7 +2,7 @@ import app from './app.js';
 import 'dotenv/config';
 import connectDB from './db/connect.js';
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const start = async () => {
   try {
