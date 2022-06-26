@@ -1,5 +1,6 @@
 // CRUD operations for User
 import User from '../models/user.js';
+import Password from '../utils/password.js';
 
 const createUser = async (body) => {
   try {
@@ -30,16 +31,19 @@ const getUserByUsername = async (username) => {
   }
 };
 
-// const updateUser = async (req, res) => {
-//   try {
-//     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-//       new: true,
-//     });
-//     res.status(StatusCodes.OK).send(user);
-//   } catch (error) {
-//     res.status(StatusCodes.BAD_REQUEST).send([{ message: 'Bad Request!' }]);
-//   }
-// };
+const updateUser = async (email, body) => {
+  try {
+    if (body.password) {
+      body.password = await Password.toHash(body.password);
+    }
+    const user = await User.findOneAndUpdate({ email }, body, {
+      new: true,
+    });
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // const deleteUser = async (req, res) => {
 //   try {
@@ -50,4 +54,4 @@ const getUserByUsername = async (username) => {
 //   }
 // };
 
-export { createUser, getUser, getUserByUsername };
+export { createUser, getUser, getUserByUsername, updateUser };

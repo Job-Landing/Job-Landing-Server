@@ -8,6 +8,7 @@ import errorHandler from './middlewares/error-handler.js';
 
 import { signupRouter } from './routes/user/signup.js';
 import { signinRouter } from './routes/user/signin.js';
+import { updateUserRouter } from './routes/user/update.js';
 
 import { createJobRouter } from './routes/job/create.js';
 import { getJobsRouter } from './routes/job/show.js';
@@ -24,6 +25,7 @@ app.use(cors());
 // routes
 app.use(signupRouter);
 app.use(signinRouter);
+app.use(updateUserRouter);
 
 app.use(createJobRouter);
 app.use(getJobsRouter);
