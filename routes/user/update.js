@@ -34,7 +34,7 @@ router.put(
 
     const existingUsername = await getUserByUsername(username);
     if (existingUsername) {
-      throw new BadRequestError('Username cannot be used!');
+      throw new BadRequestError(`Username ${username} is not available!`);
     }
 
     const isValidPassword = await Password.compare(
