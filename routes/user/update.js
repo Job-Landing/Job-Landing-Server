@@ -1,6 +1,10 @@
 import express from 'express';
 import { body } from 'express-validator/check/index.js';
-import { getUser, updateUser } from '../../controllers/user-controller.js';
+import {
+  getUser,
+  getUserByUsername,
+  updateUser,
+} from '../../controllers/user-controller.js';
 import Password from '../../utils/password.js';
 import BadRequestError from '../../errors/bad-request-error.js';
 import { StatusCodes } from 'http-status-codes';
@@ -21,11 +25,16 @@ router.put(
   async (req, res) => {
     // user id to find the user
     const originalPassword = req.params.originalPassword;
-    const { email, password } = req.body;
+    const { username, email, password } = req.body;
 
     const existingUser = await getUser(email);
     if (!existingUser) {
       throw new BadRequestError('User does not exist!');
+    }
+
+    const existingUsername = await getUserByUsername(username);
+    if (existingUsername) {
+      throw new BadRequestError('Username cannot be used!');
     }
 
     const isValidPassword = await Password.compare(
@@ -37,7 +46,7 @@ router.put(
       throw new BadRequestError('Invalid username or password!');
     }
 
-    const updatedUser = await updateUser(email, { email, password });
+    const updatedUser = await updateUser(email, { username, email, password });
 
     res.status(StatusCodes.OK).send(updatedUser);
     console.log('update user');
