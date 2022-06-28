@@ -32,10 +32,10 @@ router.put(
       throw new BadRequestError('User does not exist!');
     }
 
-    const existingUsername = await getUserByUsername(username);
-    if (existingUsername) {
-      throw new BadRequestError(`Username ${username} is not available!`);
-    }
+    // const existingUsername = await getUserByUsername(username);
+    // if (existingUsername) {
+    //   throw new BadRequestError(`Username ${username} is not available!`);
+    // }
 
     const isValidPassword = await Password.compare(
       existingUser.password,
