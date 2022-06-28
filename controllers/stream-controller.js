@@ -27,11 +27,13 @@ const getItems = async () => {
   }
 };
 
-const updateItem = async (stream) => {
+const updateItem = async (jobId, stream) => {
   try {
-    const item = await Stream.findOneAndUpdate(stream.jobId, stream, {
+    console.log(stream);
+    const item = await Stream.findOneAndUpdate({ jobId }, stream, {
       new: true,
     });
+    console.log(item);
     return item;
   } catch (error) {
     console.log(error);

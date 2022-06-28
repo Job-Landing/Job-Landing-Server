@@ -39,11 +39,10 @@ router.put(
       type: job.type,
       location: job.location,
       applyUrl: job.applyUrl,
-      jobId: job._id,
     };
 
     console.log('update stream item');
-    await updateItem(stream);
+    await updateItem(req.params.job_id, stream);
 
     res.status(StatusCodes.OK).send(job);
   }
