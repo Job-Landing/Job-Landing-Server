@@ -57,7 +57,7 @@ const deleteJob = async (user_id, job_id) => {
     );
     const deletedJob = jobs.job_list.splice(jobIndex, 1);
     await jobs.save();
-    return deletedJob._id;
+    return deletedJob[0]._id;
   } catch (error) {
     console.log(error);
   }
